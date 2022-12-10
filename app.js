@@ -2,7 +2,7 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const credential=require("./credential");
 const mongoose=require("mongoose");
 const _=require("lodash");
 const app = express();
@@ -12,11 +12,31 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://admin-senapathi:Test123@cluster0.3kxid12.mongodb.net/todolistDB",{useNewUrlParser: true});
+/*const dbURI="mongodb+srv://admin-senapathi:<password>@cluster0.3kxid12.mongodb.net/?retryWrites=true&w=majority/todolistDB";
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then((result) => console.log('connected to db'))
+    .catch((err) => console.log(err));*/
+    //mongoose.connect("mongodb+srv://admin-senapathi:<password>@cluster0.3kxid12.mongodb.net/?retryWrites=true&w=majority/todolistDB",{useNewUrlParser: true});
 
-const itemsSchema={
-  name:String,
-};
+
+
+
+
+    const connectionParams={
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }
+    mongoose.connect(credential.url,connectionParams)
+        .then( () => {
+            console.log('Connected to the database ')
+        })
+        .catch( (err) => {
+            console.error(`Error connecting to the database. n${err}`);
+        })
+
+    const itemsSchema={
+      name:String,
+    };
 
 const Item=mongoose.model("Item",itemsSchema);
 
