@@ -26,7 +26,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
         useNewUrlParser: true,
         useUnifiedTopology: true
     }
-    mongoose.connect(credential.url,connectionParams)
+    mongoose.connect(process.env.pass,connectionParams)
         .then( () => {
             console.log('Connected to the database ')
         })
