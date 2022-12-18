@@ -2,7 +2,6 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const credential=require("./credential");
 const mongoose=require("mongoose");
 const _=require("lodash");
 const app = express();
